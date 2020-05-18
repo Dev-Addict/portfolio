@@ -1,12 +1,11 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import BaseLayout from "../components/BaseLayout";
 
 const Home = () => {
     return (
-        <div>
-            <BaseLayout>
-
-            </BaseLayout>
-        </div>
+        <BaseLayout>
+        </BaseLayout>
     );
 };
 
