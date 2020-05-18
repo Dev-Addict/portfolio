@@ -1,6 +1,6 @@
 import Header from "../components/Header";
 
-const Portfolios = () => {
+const Blog = () => {
     return (
         <div>
             <Header/>
@@ -8,4 +8,4 @@ const Portfolios = () => {
     );
 };
 
-export default Portfolios;
+export default Blog;
