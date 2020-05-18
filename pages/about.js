@@ -1,9 +1,11 @@
-import Header from "../components/Header";
+import BaseLayout from "../components/BaseLayout";
 
 const About = () => {
     return (
         <div>
-            <Header/>
+            <BaseLayout>
+
+            </BaseLayout>
         </div>
     );
 };

@@ -1,9 +1,11 @@
-import Header from "../components/Header";
+import BaseLayout from "../components/BaseLayout";
 
 const Blog = () => {
     return (
         <div>
-            <Header/>
+            <BaseLayout>
+
+            </BaseLayout>
         </div>
     );
 };
