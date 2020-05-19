@@ -11,7 +11,22 @@ class Auth0Client {
 
     login = () => {
         this.auth0.authorize();
-    }
+    };
+
+    handleAuthentication = () => {
+        return new Promise((resolve, reject) => {
+            this.auth0.parseHash((err, authResult) => {
+                if (authResult && authResult.accessToken && authResult.idToken) {
+                    this.setSession(authResult);
+                    resolve();
+                } else if (err) {
+                    reject(err);
+                }
+            })
+        });
+    };
+
+    setSession = token => {};
 }
 
 const auth0Client = new Auth0Client();
