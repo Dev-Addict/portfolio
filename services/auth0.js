@@ -45,7 +45,7 @@ class Auth0Client {
     };
 
     isAuthenticated = () => {
-        const expiresAt = Cookies.getJson('expiresAt');
+        const expiresAt = Cookies.get('expiresAt');
         return new Date().getTime() < expiresAt;
     };
 }

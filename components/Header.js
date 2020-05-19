@@ -47,7 +47,7 @@ const Header = () => {
         <div>
             <Navbar color="transparent" dark expand="md" className="port-navbar port-default absolute">
                 <NavbarBrand href="/" className="port-navbar-brand">Aria Azadi Pour</NavbarBrand>
-                <NavbarToggler onClick={toggle} />
+                <NavbarToggler onClick={toggle}/>
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>
                         <BsLink route="/" text="Home"/>
@@ -57,8 +57,11 @@ const Header = () => {
                         <BsLink route="/portfolios" text="Portfolios"/>
                     </Nav>
                     <NavbarText className="port-navbar-text">
-                        <Login/>
-                        <Logout/>
+                        {
+                            auth0Client.isAuthenticated() ?
+                                <Logout/> :
+                                <Login/>
+                        }
                     </NavbarText>
                 </Collapse>
             </Navbar>
