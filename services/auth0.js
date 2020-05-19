@@ -52,7 +52,7 @@ class Auth0Client {
     };
 
     clientAuth = async () => {
-        const token = Cookies.get('jwt');
+        const token = Cookies.getJSON('jwt');
         return await this.verifyToken(token);
     };
 
@@ -71,10 +71,14 @@ class Auth0Client {
     verifyToken = async token => {
         const decodedToken = jsonWebToken.decode(token, {complete: true});
 
+        if (!decodedToken) {
+            return undefined;
+        }
+
         const jwks = await this.getJWKS();
         const jwk = jwks.keys[0];
         const cert =
-            `-----BEGIN CERTIFICATE-----\n${jwk.x5c[0].match(/.{1,64}/g).join('\n')}-----END CERTIFICATE-----\n`;
+            `-----BEGIN CERTIFICATE-----\n${jwk.x5c[0].match(/.{1,64}/g).join('\n')}\n-----END CERTIFICATE-----\n`;
 
         if (jwk.kid === decodedToken.header.kid) {
             try {
@@ -93,7 +97,6 @@ class Auth0Client {
     getJWKS = async () => {
         try {
             const res = await axios.get('https://dev-ajkpwfyj.auth0.com/.well-known/jwks.json');
-            console.log(res.data);
             return res.data;
         } catch(err) {
             console.log({...err});

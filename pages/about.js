@@ -1,4 +1,5 @@
 import BaseLayout from "../components/BaseLayout";
+import withAuth from "../components/withAuth";
 
 const About = ({auth}) => {
     return (
@@ -7,4 +8,4 @@ const About = ({auth}) => {
     );
 };
 
-export default About;
+export default withAuth(About);
