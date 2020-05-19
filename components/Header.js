@@ -1,25 +1,48 @@
-import {Fragment} from 'react';
+import {useState} from 'react';
 import Link from "next/link";
+import {
+    Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
+    NavItem,
+    NavLink,
+    NavbarText
+} from 'reactstrap';
+
+const BsLink = ({route, text}) => {
+    return (
+        <NavItem className="port-navbar-item">
+            <Link href={route}>
+                <a className="nav-link port-navbar-link">{text}</a>
+            </Link>
+        </NavItem>
+    );
+};
 
 const Header = () => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggle = () => setIsOpen(!isOpen);
+
     return (
-        <Fragment>
-            <Link href="/">
-                <a>Home</a>
-            </Link>
-            <Link href="/about">
-                <a>about</a>
-            </Link>
-            <Link href="/blog">
-                <a>Blog</a>
-            </Link>
-            <Link href="/cv">
-                <a>CV</a>
-            </Link>
-            <Link href="/portfolios">
-                <a>Portfolios</a>
-            </Link>
-        </Fragment>
+        <div>
+            <Navbar color="transparent" dark expand="md" className="port-navbar port-default absolute">
+                <NavbarBrand href="/" className="port-navbar-brand">Aria Azadi Pour</NavbarBrand>
+                <NavbarToggler onClick={toggle} />
+                <Collapse isOpen={isOpen} navbar>
+                    <Nav className="mr-auto" navbar>
+                        <BsLink route="/" text="Home"/>
+                        <BsLink route="/about" text="About"/>
+                        <BsLink route="/blog" text="Blog"/>
+                        <BsLink route="/cv" text="CV"/>
+                        <BsLink route="/portfolios" text="Portfolios"/>
+                    </Nav>
+                    <NavbarText className="port-navbar-text">Web Developer</NavbarText>
+                </Collapse>
+            </Navbar>
+        </div>
     );
 };
 

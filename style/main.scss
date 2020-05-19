@@ -1,8 +1,13 @@
 @import './fonts';
 @import './index';
+@import './header';
 
 html, body {
-  height:100%;
-  width:100%;
+  height: 100%;
+  width: 100%;
   font-family: 'Montserrat', 'Helvetica', 'serif';
+}
+
+.absolute {
+  position: absolute;
 }
