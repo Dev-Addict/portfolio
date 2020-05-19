@@ -7,9 +7,10 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink,
     NavbarText
 } from 'reactstrap';
+
+import auth0Client from "../services/auth0";
 
 const BsLink = ({route, text}) => {
     return (
@@ -23,13 +24,17 @@ const BsLink = ({route, text}) => {
 
 const Login = () => {
     return (
-        <span className="nav-link port-navbar-link clickable">Login</span>
+        <span className="nav-link port-navbar-link clickable" onClick={auth0Client.login}>
+            Login
+        </span>
     );
 };
 
 const Logout = () => {
     return (
-        <span className="nav-link port-navbar-link clickable">Logout</span>
+        <span className="nav-link port-navbar-link clickable">
+            Logout
+        </span>
     );
 };
 
