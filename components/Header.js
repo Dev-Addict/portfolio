@@ -32,7 +32,7 @@ const Login = () => {
 
 const Logout = () => {
     return (
-        <span className="nav-link port-navbar-link clickable">
+        <span className="nav-link port-navbar-link clickable" onClick={auth0Client.logout}>
             Logout
         </span>
     );

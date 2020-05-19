@@ -1,4 +1,5 @@
 import auth0 from 'auth0-js';
+import Cookies from 'js-cookie';
 
 class Auth0Client {
     auth0 = new auth0.WebAuth({
@@ -26,7 +27,27 @@ class Auth0Client {
         });
     };
 
-    setSession = token => {};
+    setSession = authResult => {
+        const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
+        Cookies.set('user', authResult.idTokenPayload);
+        Cookies.set('jwt', authResult.idToken);
+        Cookies.set('expiresAt', expiresAt);
+    };
+
+    logout = () => {
+        Cookies.remove('user');
+        Cookies.remove('jwt');
+        Cookies.remove('expiresAt');
+        this.auth0.logout({
+            returnTo: '',
+            clientID: '55ZCUrCZzI6tHOZtaoazlt2uJ0GJ3Av1'
+        });
+    };
+
+    isAuthenticated = () => {
+        const expiresAt = Cookies.getJson('expiresAt');
+        return new Date().getTime() < expiresAt;
+    };
 }
 
 const auth0Client = new Auth0Client();
