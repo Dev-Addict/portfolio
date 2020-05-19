@@ -21,6 +21,18 @@ const BsLink = ({route, text}) => {
     );
 };
 
+const Login = () => {
+    return (
+        <span className="nav-link port-navbar-link clickable">Login</span>
+    );
+};
+
+const Logout = () => {
+    return (
+        <span className="nav-link port-navbar-link clickable">Logout</span>
+    );
+};
+
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -39,7 +51,10 @@ const Header = () => {
                         <BsLink route="/cv" text="CV"/>
                         <BsLink route="/portfolios" text="Portfolios"/>
                     </Nav>
-                    <NavbarText className="port-navbar-text">Web Developer</NavbarText>
+                    <NavbarText className="port-navbar-text">
+                        <Login/>
+                        <Logout/>
+                    </NavbarText>
                 </Collapse>
             </Navbar>
         </div>
