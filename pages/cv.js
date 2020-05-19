@@ -1,8 +1,8 @@
 import BaseLayout from "../components/BaseLayout";
 
-const Cv = () => {
+const Cv = ({auth}) => {
     return (
-        <BaseLayout>
+        <BaseLayout auth={auth}>
         </BaseLayout>
     );
 };

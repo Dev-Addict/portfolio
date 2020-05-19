@@ -1,8 +1,8 @@
 import BaseLayout from "../components/BaseLayout";
 
-const Blog = () => {
+const Blog = ({auth}) => {
     return (
-        <BaseLayout>
+        <BaseLayout auth={auth}>
         </BaseLayout>
     );
 };

@@ -3,11 +3,11 @@ import {Container, Row, Col} from "reactstrap";
 
 import BaseLayout from "../components/BaseLayout";
 
-const Home = () => {
+const Home = ({auth}) => {
     const techs = ['JavaScript', 'Python', 'Java', 'C/C++'];
 
     return (
-        <BaseLayout className="cover">
+        <BaseLayout className="cover" auth={auth}>
             <div className="main-section">
                 <div className="background-image">
                     <img src="/static/images/background-index.png"/>

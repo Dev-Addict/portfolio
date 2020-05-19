@@ -1,8 +1,8 @@
 import BaseLayout from "../components/BaseLayout";
 
-const Portfolios = () => {
+const Portfolios = ({auth}) => {
     return (
-        <BaseLayout>
+        <BaseLayout auth={auth}>
         </BaseLayout>
     );
 };

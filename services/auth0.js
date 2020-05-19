@@ -48,6 +48,22 @@ class Auth0Client {
         const expiresAt = Cookies.get('expiresAt');
         return new Date().getTime() < expiresAt;
     };
+
+    clientAuth = () => {
+        return this.isAuthenticated();
+    };
+
+    serverAuth = req => {
+        if (req.headers.cookies) {
+            const expiresAtCookie = req.headers.cookie.split(';')
+                .find(c => c.trim().startsWith('expiresAt='));
+            if (expiresAtCookie) {
+                const expiresAt = expiresAtCookie.split('=')[1];
+                return new Date().getTime() < expiresAt;
+            }
+            return false;
+        }
+    }
 }
 
 const auth0Client = new Auth0Client();

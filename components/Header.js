@@ -38,7 +38,7 @@ const Logout = () => {
     );
 };
 
-const Header = () => {
+const Header = ({auth}) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => setIsOpen(!isOpen);
@@ -58,7 +58,7 @@ const Header = () => {
                     </Nav>
                     <NavbarText className="port-navbar-text">
                         {
-                            auth0Client.isAuthenticated() ?
+                            auth.isAuthenticated ?
                                 <Logout/> :
                                 <Login/>
                         }

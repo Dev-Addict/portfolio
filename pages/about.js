@@ -1,8 +1,8 @@
 import BaseLayout from "../components/BaseLayout";
 
-const About = () => {
+const About = ({auth}) => {
     return (
-        <BaseLayout>
+        <BaseLayout auth={auth}>
         </BaseLayout>
     );
 };
