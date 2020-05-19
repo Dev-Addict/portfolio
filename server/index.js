@@ -1,7 +1,8 @@
 const express = require('express');
 const next = require('next');
 
-const routes = require('./routes');
+const routes = require('../routes');
+const auth = require('./services/auth');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
@@ -13,6 +14,15 @@ app.prepare()
 
         server.get('*', (req, res) => {
             return handle(req, res);
+        });
+
+        server.use((err, req, res, next) => {
+            if (err.name === 'UnauthorizedError') {
+                res.status(401).json({
+                    status: 'err',
+                    message: `You Need To Be Authorized To Use This Route. ${err.message}`
+                });
+            }
         });
 
         server.listen(3000, err => {
