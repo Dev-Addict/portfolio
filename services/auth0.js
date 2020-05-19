@@ -1,6 +1,7 @@
 import auth0 from 'auth0-js';
 import Cookies from 'js-cookie';
 import jsonWebToken from 'jsonwebtoken';
+import axios from 'axios';
 
 class Auth0Client {
     auth0 = new auth0.WebAuth({
@@ -50,30 +51,53 @@ class Auth0Client {
         return new Date().getTime() < expiresAt;
     };
 
-    clientAuth = () => {
+    clientAuth = async () => {
         const token = Cookies.get('jwt');
-        const verifiedToken = this.verifyToken(token);
-        return verifiedToken;
+        return await this.verifyToken(token);
     };
 
-    serverAuth = req => {
+    serverAuth = async req => {
         if (req.headers.cookies) {
             const jwtCookie = req.headers.cookie.split(';')
                 .find(c => c.trim().startsWith('jwt='));
             if (jwtCookie) {
                 const token = jwtCookie.split('=')[1];
-                const verifiedToken = this.verifyToken(token);
-                return verifiedToken;
+                return await this.verifyToken(token);
             }
             return undefined;
         }
     };
 
-    verifyToken = token => {
-        const decodedToken = jsonWebToken.decode(token);
-        const expiresAt = decodedToken.exp * 1000;
+    verifyToken = async token => {
+        const decodedToken = jsonWebToken.decode(token, {complete: true});
 
-        return (decodedToken && new Date().getTime() < expiresAt) ? decodedToken : undefined;
+        const jwks = await this.getJWKS();
+        const jwk = jwks.keys[0];
+        const cert =
+            `-----BEGIN CERTIFICATE-----\n${jwk.x5c[0].match(/.{1,64}/g).join('\n')}-----END CERTIFICATE-----\n`;
+
+        if (jwk.kid === decodedToken.header.kid) {
+            try {
+                const verifiedToken = jsonWebToken.verify(token, cert);
+
+                const expiresAt = verifiedToken.exp * 1000;
+
+                return (verifiedToken && new Date().getTime() < expiresAt) ? verifiedToken : undefined;
+            } catch (err) {
+                return undefined;
+            }
+        }
+        return undefined;
+    };
+
+    getJWKS = async () => {
+        try {
+            const res = await axios.get('https://dev-ajkpwfyj.auth0.com/.well-known/jwks.json');
+            console.log(res.data);
+            return res.data;
+        } catch(err) {
+            console.log({...err});
+        }
     };
 }
 

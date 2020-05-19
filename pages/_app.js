@@ -8,7 +8,7 @@ class _App extends App {
     static async getInitialProps({Component, router, ctx}) {
         let pageProps = {};
 
-        const user = process.browser ? auth0Client.clientAuth() : auth0Client.serverAuth(ctx.req);
+        const user = process.browser ? await auth0Client.clientAuth() : await auth0Client.serverAuth(ctx.req);
 
         const auth = {
             user,
