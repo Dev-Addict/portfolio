@@ -1,16 +1,16 @@
-import {Fragment} from 'react';
-
 import Header from "./Header";
+import BasePage from "./BasePage";
 
-const BaseLayout = props => {
-    const {children, className} = props;
+const BaseLayout = ({children, className = ''}) => {
 
     return (
         <div className="layout-container">
             <Header/>
             <main className={`cover ${className}`}>
                 <div className="wrapper">
-                    {children}
+                    <BasePage>
+                        {children}
+                    </BasePage>
                 </div>
             </main>
         </div>
