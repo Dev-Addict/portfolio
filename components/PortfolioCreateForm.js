@@ -1,34 +1,85 @@
-import {useState} from 'react';
+import {Formik, Form, Field, ErrorMessage} from "formik";
 
 const PortfolioCreateForm = props => {
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [programingLanguage, setProgramingLanguage] = useState('');
+    const validate = values => {
+        const errors = {};
+        if (!values.email) {
+            errors.email = 'Required';
+        } else if (
+            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+        ) {
+            errors.email = 'Invalid email address';
+        }
+        return errors;
+    };
 
-    const onChange = setFunction => event => setFunction(event.target.value);
-
-    const handleSubmit = event => {
-        event.preventDefault();
+    const INITIAL_VALUES = {
+        title: '',
+        company: '',
+        location: '',
+        position: '',
+        description: '',
+        startDate: '',
+        endDate: ''
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>Name</label>
-            <input type="text" value={title} onChange={onChange(setTitle)}/>
-            <label>Description</label>
-            <input type="text" value={description} onChange={onChange(setDescription)}/>
-            <label>Favorite Programming Language</label>
-            <select value={programingLanguage} onChange={onChange(setProgramingLanguage)}>
-                <option value="">Select Programming Language</option>
-                <option value="JavaScript">JavaScript</option>
-                <option value="PHP">PHP</option>
-                <option value="C/C++">C/C++</option>
-                <option value="Python">Python</option>
-                <option value="Java">Java</option>
-                <option value="C#">C#</option>
-            </select>
-            <button type="submit">Create</button>
-        </form>
+        <div>
+            <Formik
+                initialValues={INITIAL_VALUES}
+                validate={validate}>
+                {({
+                      values,
+                      errors,
+                      touched,
+                      handleChange,
+                      handleBlur,
+                      handleSubmit,
+                      isSubmitting
+                  }) => (
+                    <form onSubmit={handleSubmit}>
+                        <div>
+                            <label>Title</label>
+                            <Field type="text" name="title"/>
+                            <ErrorMessage name="title" component="div"/>
+                        </div>
+                        <div>
+                            <label>Company</label>
+                            <Field type="text" name="company"/>
+                            <ErrorMessage name="company" component="div"/>
+                        </div>
+                        <div>
+                            <label>Location</label>
+                            <Field type="text" name="location"/>
+                            <ErrorMessage name="location" component="div"/>
+                        </div>
+                        <div>
+                            <label>Position</label>
+                            <Field type="text" name="position"/>
+                            <ErrorMessage name="position" component="div"/>
+                        </div>
+                        <div>
+                            <label>Description</label>
+                            <Field type="textarea" name="description" component="textarea"/>
+                            <ErrorMessage name="description" component="div"/>
+                        </div>
+                        <div>
+                            <label>Start Date</label>
+                            <Field type="date" name="startDate"/>
+                            <ErrorMessage name="startDate" component="div"/>
+                        </div>
+                        <div>
+                            <label>End Date</label>
+                            <Field type="date" name="endDate"/>
+                            <ErrorMessage name="endDate" component="div"/>
+                        </div>
+                        <button type="submit" disabled={isSubmitting}>
+                            Create
+                        </button>
+                    </form>
+                )}
+            </Formik>
+        </div>
     );
 };
 
