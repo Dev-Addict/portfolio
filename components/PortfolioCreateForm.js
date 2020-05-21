@@ -21,6 +21,14 @@ const PortfolioCreateForm = props => {
                 errors[key] = `${key.charAt(0).toUpperCase() + key.substr(1)} is required.`
             }
         });
+
+        const startDate = values.startDate;
+        const endDate = values.endDate;
+
+        if (startDate && endDate && endDate.isBefore(startDate)) {
+            errors.endDate = 'End Date can not be before Start Date.'
+        }
+
         return errors;
     };
 
