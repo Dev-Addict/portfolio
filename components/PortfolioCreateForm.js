@@ -4,18 +4,6 @@ import {Button, FormGroup, Label} from 'reactstrap';
 import Input from "./Input";
 
 const PortfolioCreateForm = props => {
-    const validate = values => {
-        const errors = {};
-        if (!values.email) {
-            errors.email = 'Required';
-        } else if (
-            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-        ) {
-            errors.email = 'Invalid email address';
-        }
-        return errors;
-    };
-
     const INITIAL_VALUES = {
         title: '',
         company: '',
@@ -24,6 +12,16 @@ const PortfolioCreateForm = props => {
         description: '',
         startDate: '',
         endDate: ''
+    };
+
+    const validate = values => {
+        const errors = {};
+        Object.entries(values).forEach(([key, value]) => {
+            if (!value) {
+                errors[key] = `${key.charAt(0).toUpperCase() + key.substr(1)} is required.`
+            }
+        });
+        return errors;
     };
 
     return (
