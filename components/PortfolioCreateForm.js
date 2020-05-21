@@ -1,9 +1,10 @@
 import {Formik, Form, Field} from "formik";
+import {Button} from 'reactstrap';
 
 import Input from "./Input";
 import DateInput from "./DateInput";
 
-const PortfolioCreateForm = () => {
+const PortfolioCreateForm = ({onSubmit}) => {
     const INITIAL_VALUES = {
         title: '',
         company: '',
@@ -36,7 +37,8 @@ const PortfolioCreateForm = () => {
         <div>
             <Formik
                 initialValues={INITIAL_VALUES}
-                validate={validate}>
+                validate={validate}
+                onSubmit={onSubmit}>
                 {({
                       handleSubmit,
                       isSubmitting
@@ -50,9 +52,9 @@ const PortfolioCreateForm = () => {
                                label="Description"/>
                         <Field name="startDate" className="form-control" component={DateInput} label="Start Date"/>
                         <Field name="endDate" className="form-control" component={DateInput} label="End Date" canHide/>
-                        <button type="submit" disabled={isSubmitting}>
+                        <Button type="submit" disabled={isSubmitting} color="success" size="lg">
                             Create
-                        </button>
+                        </Button>
                     </Form>
                 )}
             </Formik>

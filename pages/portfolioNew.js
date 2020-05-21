@@ -9,7 +9,7 @@ const PortfolioNew = ({auth}) => {
         <BaseLayout auth={auth} title="Create Portfolio" className="portfolio-create-page">
             <Row>
                 <Col md="6">
-                    <PortfolioCreateForm/>
+                    <PortfolioCreateForm onSubmit={values => {}}/>
                 </Col>
             </Row>
         </BaseLayout>
