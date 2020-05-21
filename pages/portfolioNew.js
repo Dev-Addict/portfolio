@@ -2,12 +2,19 @@ import BaseLayout from "../components/BaseLayout";
 import withAuth from "../components/withAuth";
 import PortfolioCreateForm from "../components/PortfolioCreateForm";
 
+import {Row, Col} from 'reactstrap';
+
 const PortfolioNew = ({auth}) => {
     return (
         <BaseLayout auth={auth} title="Create Portfolio" className="portfolio-create-page">
-            <PortfolioCreateForm/>
+            <Row>
+                <Col md="6">
+                    <PortfolioCreateForm/>
+                </Col>
+            </Row>
         </BaseLayout>
     );
 };
 
-export default withAuth('admin')(PortfolioNew);
+// export default withAuth('admin')(PortfolioNew);
+export default PortfolioNew;

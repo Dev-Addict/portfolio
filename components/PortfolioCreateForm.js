@@ -1,4 +1,5 @@
 import {Formik, Form, Field, ErrorMessage} from "formik";
+import {Button, FormGroup, Label} from 'reactstrap';
 
 const PortfolioCreateForm = props => {
     const validate = values => {
@@ -37,46 +38,46 @@ const PortfolioCreateForm = props => {
                       handleSubmit,
                       isSubmitting
                   }) => (
-                    <form onSubmit={handleSubmit}>
-                        <div>
-                            <label>Title</label>
-                            <Field type="text" name="title"/>
+                    <Form onSubmit={handleSubmit}>
+                        <FormGroup>
+                            <Label>Title</Label>
+                            <Field type="text" name="title" className="form-control"/>
                             <ErrorMessage name="title" component="div"/>
-                        </div>
-                        <div>
-                            <label>Company</label>
-                            <Field type="text" name="company"/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>Company</Label>
+                            <Field type="text" name="company" className="form-control"/>
                             <ErrorMessage name="company" component="div"/>
-                        </div>
-                        <div>
-                            <label>Location</label>
-                            <Field type="text" name="location"/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>Location</Label>
+                            <Field type="text" name="location" className="form-control"/>
                             <ErrorMessage name="location" component="div"/>
-                        </div>
-                        <div>
-                            <label>Position</label>
-                            <Field type="text" name="position"/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>Position</Label>
+                            <Field type="text" name="position" className="form-control"/>
                             <ErrorMessage name="position" component="div"/>
-                        </div>
-                        <div>
-                            <label>Description</label>
-                            <Field type="textarea" name="description" component="textarea"/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>Description</Label>
+                            <Field type="textarea" name="description" component="textarea" className="form-control"/>
                             <ErrorMessage name="description" component="div"/>
-                        </div>
-                        <div>
-                            <label>Start Date</label>
-                            <Field type="date" name="startDate"/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>Start Date</Label>
+                            <Field type="date" name="startDate" className="form-control"/>
                             <ErrorMessage name="startDate" component="div"/>
-                        </div>
-                        <div>
-                            <label>End Date</label>
-                            <Field type="date" name="endDate"/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>End Date</Label>
+                            <Field type="date" name="endDate" className="form-control"/>
                             <ErrorMessage name="endDate" component="div"/>
-                        </div>
+                        </FormGroup>
                         <button type="submit" disabled={isSubmitting}>
                             Create
                         </button>
-                    </form>
+                    </Form>
                 )}
             </Formik>
         </div>
