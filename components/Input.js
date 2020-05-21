@@ -1,4 +1,4 @@
-import {Button, FormGroup, Label, Input as InputStrap} from 'reactstrap';
+import {FormGroup, Label, Input as InputStrap} from 'reactstrap';
 
 const Input = ({type, label, field, form: {touched, errors}, ...props}) => {
     return (

@@ -1,7 +1,7 @@
-import {Formik, Form, Field, ErrorMessage} from "formik";
-import {Button, FormGroup, Label} from 'reactstrap';
+import {Formik, Form, Field} from "formik";
 
 import Input from "./Input";
+import DateInput from "./DateInput";
 
 const PortfolioCreateForm = props => {
     const INITIAL_VALUES = {
@@ -17,7 +17,7 @@ const PortfolioCreateForm = props => {
     const validate = values => {
         const errors = {};
         Object.entries(values).forEach(([key, value]) => {
-            if (!value) {
+            if (!value && !['startDate', 'endDate'].includes(key)) {
                 errors[key] = `${key.charAt(0).toUpperCase() + key.substr(1)} is required.`
             }
         });
@@ -30,11 +30,6 @@ const PortfolioCreateForm = props => {
                 initialValues={INITIAL_VALUES}
                 validate={validate}>
                 {({
-                      values,
-                      errors,
-                      touched,
-                      handleChange,
-                      handleBlur,
                       handleSubmit,
                       isSubmitting
                   }) => (
@@ -44,8 +39,8 @@ const PortfolioCreateForm = props => {
                         <Field type="text" name="location" className="form-control" component={Input} label="Location"/>
                         <Field type="text" name="position" className="form-control" component={Input} label="Position"/>
                         <Field type="textarea" name="description" component={Input} className="form-control" label="Description"/>
-                        <Field type="date" name="startDate" className="form-control" component={Input} label="Start Date"/>
-                        <Field type="date" name="endDate" className="form-control" component={Input} label="End Date"/>
+                        <Field name="startDate" className="form-control" component={DateInput} label="Start Date"/>
+                        <Field name="endDate" className="form-control" component={DateInput} label="End Date"/>
                         <button type="submit" disabled={isSubmitting}>
                             Create
                         </button>
