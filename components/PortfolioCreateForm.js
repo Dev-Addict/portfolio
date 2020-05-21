@@ -3,7 +3,7 @@ import {Formik, Form, Field} from "formik";
 import Input from "./Input";
 import DateInput from "./DateInput";
 
-const PortfolioCreateForm = props => {
+const PortfolioCreateForm = () => {
     const INITIAL_VALUES = {
         title: '',
         company: '',
@@ -46,9 +46,10 @@ const PortfolioCreateForm = props => {
                         <Field type="text" name="company" className="form-control" component={Input} label="Company"/>
                         <Field type="text" name="location" className="form-control" component={Input} label="Location"/>
                         <Field type="text" name="position" className="form-control" component={Input} label="Position"/>
-                        <Field type="textarea" name="description" component={Input} className="form-control" label="Description"/>
+                        <Field type="textarea" name="description" component={Input} className="form-control"
+                               label="Description"/>
                         <Field name="startDate" className="form-control" component={DateInput} label="Start Date"/>
-                        <Field name="endDate" className="form-control" component={DateInput} label="End Date"/>
+                        <Field name="endDate" className="form-control" component={DateInput} label="End Date" canHide/>
                         <button type="submit" disabled={isSubmitting}>
                             Create
                         </button>
