@@ -1,6 +1,8 @@
 @import './fonts';
+@import './colors';
 @import './index';
 @import './header';
+@import './portfolios';
 
 html, body {
   height: 100%;
@@ -13,8 +15,18 @@ html, body {
 }
 
 .base-page {
-  margin-top: 150px;
+  padding-top: 150px;
   color: white;
+  background-color: #ecedee;
+
+  .page-header {
+    .page-header-title {
+      font-weight: 700;
+      color: black;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+  }
 }
 
 .clickable {

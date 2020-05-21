@@ -1,14 +1,14 @@
 import Header from "./Header";
 import BasePage from "./BasePage";
 
-const BaseLayout = ({children, className = '', auth}) => {
+const BaseLayout = ({children, className = '', auth, title = '', headerType = 'default'}) => {
 
     return (
         <div className="layout-container">
-            <Header auth={auth}/>
+            <Header className={`port-nav-${headerType}`} auth={auth}/>
             <main className={`cover ${className}`}>
                 <div className="wrapper">
-                    <BasePage>
+                    <BasePage title={title}>
                         {children}
                     </BasePage>
                 </div>

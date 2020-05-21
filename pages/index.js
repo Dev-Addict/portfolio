@@ -7,11 +7,11 @@ const Home = ({auth}) => {
     const techs = ['JavaScript', 'Python', 'Java', 'C/C++'];
 
     return (
-        <BaseLayout className="cover" auth={auth}>
+        <BaseLayout className="cover" auth={auth} title="Home" headerType="index">
             <div className="main-section">
-                <div className="background-image">
-                    <img src="/static/images/background-index.png"/>
-                </div>
+                {/*<div className="background-image">*/}
+                {/*    <img src="/static/images/background-index.png"/>*/}
+                {/*</div>*/}
 
                 <Container>
                     <Row>

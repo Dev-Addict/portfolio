@@ -2,7 +2,7 @@ import BaseLayout from "../components/BaseLayout";
 
 const Cv = ({auth}) => {
     return (
-        <BaseLayout auth={auth}>
+        <BaseLayout auth={auth} title="CV">
         </BaseLayout>
     );
 };

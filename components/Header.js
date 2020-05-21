@@ -38,14 +38,14 @@ const Logout = () => {
     );
 };
 
-const Header = ({auth}) => {
+const Header = ({auth, className}) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => setIsOpen(!isOpen);
 
     return (
         <div>
-            <Navbar color="transparent" dark expand="md" className="port-navbar port-default absolute">
+            <Navbar color="transparent" dark expand="md" className={`port-navbar port-nav-base absolute ${className}`}>
                 <NavbarBrand href="/" className="port-navbar-brand">Aria Azadi Pour</NavbarBrand>
                 <NavbarToggler onClick={toggle}/>
                 <Collapse isOpen={isOpen} navbar>

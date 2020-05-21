@@ -2,7 +2,7 @@ import BaseLayout from "../components/BaseLayout";
 
 const Portfolios = ({auth}) => {
     return (
-        <BaseLayout auth={auth}>
+        <BaseLayout auth={auth} title="Portfolios" className="portfolio-page">
         </BaseLayout>
     );
 };
