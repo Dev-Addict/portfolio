@@ -74,14 +74,8 @@ exports.getOne = (Model, populateOptions) =>
 exports.getAll = Model =>
     catchRequest(
         async (req, res) => {
-            let filter = {};
-            if (req.params.tourId) {
-                filter = {
-                    tour: req.params.tourId
-                }
-            }
             const features =
-                new APIFeatures(Model.find(filter), req.query)
+                new APIFeatures(Model.find(), req.query)
                     .filter()
                     .sort()
                     .limitFields()
@@ -93,7 +87,7 @@ exports.getAll = Model =>
                 page: features.queryString.page * 1 || 1,
                 limit: features.queryString.limit * 1 || 20,
                 data: {
-                    tours: docs
+                    docs
                 }
             });
         }
