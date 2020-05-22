@@ -11,3 +11,5 @@ router.route('/:id')
     .get(portfolioController.getPortfolio)
     .patch(portfolioController.updatePortfolio)
     .delete(portfolioController.deletePortfolio);
+
+module.exports = router;

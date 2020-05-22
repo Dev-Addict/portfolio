@@ -5,7 +5,9 @@ const mongoose = require('mongoose');
 const next = require('next');
 
 const routes = require('../routes');
+const portfolioRouter = require('./routes/portfolioRouter');
 const auth = require('./services/auth');
+const errorController = require('./controllers/errorController');
 
 dotenv.config({
     path: path.join(__dirname, '../config.env')
@@ -19,18 +21,13 @@ app.prepare()
     .then(() => {
         const server = express();
 
+        server.use('/api/v1/portfolios', auth.checkJWT, auth.checkRole('admin'), portfolioRouter);
+
         server.get('*', (req, res) => {
             return handle(req, res);
         });
 
-        server.use((err, req, res, next) => {
-            if (err.name === 'UnauthorizedError') {
-                res.status(401).json({
-                    status: 'err',
-                    message: `You Need To Be Authorized To Use This Route. ${err.message}`
-                });
-            }
-        });
+        server.use(errorController);
 
         server.listen(3000, err => {
             if (err) throw err;
