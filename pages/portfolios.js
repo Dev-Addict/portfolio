@@ -1,7 +1,7 @@
 import BaseLayout from "../components/BaseLayout";
 import {getPortfolios} from "../actions";
 
-const Portfolios = ({auth}) => {
+const Portfolios = ({auth, portfolios}) => {
     return (
         <BaseLayout auth={auth} title="Portfolios" className="portfolio-page">
         </BaseLayout>
