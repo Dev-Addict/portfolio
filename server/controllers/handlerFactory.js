@@ -1,9 +1,9 @@
-const catchAsync = require('../utils/catchAsync');
+const catchRequest = require('../utils/catchRequest');
 const AppError = require('../utils/AppError');
 const APIFeatures = require('../utils/APIFeatures');
 
 exports.deleteOne = Model =>
-    catchAsync(
+    catchRequest(
         async (req, res) => {
             const doc = await Model.findByIdAndDelete(req.params.id);
             if (!doc) {
@@ -18,7 +18,7 @@ exports.deleteOne = Model =>
     );
 
 exports.updateOne = Model =>
-    catchAsync(
+    catchRequest(
         async (req, res) => {
             const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
                 new: true,
@@ -39,7 +39,7 @@ exports.updateOne = Model =>
     );
 
 exports.createOne = Model =>
-    catchAsync(
+    catchRequest(
         async (req, res) => {
             const doc = await Model.create(req.body);
             res.status(201).json({
@@ -52,7 +52,7 @@ exports.createOne = Model =>
     );
 
 exports.getOne = (Model, populateOptions) =>
-    catchAsync(
+    catchRequest(
         async (req, res) => {
             let query = Model.findById(req.params.id);
             if (populateOptions) {
@@ -72,7 +72,7 @@ exports.getOne = (Model, populateOptions) =>
     );
 
 exports.getAll = Model =>
-    catchAsync(
+    catchRequest(
         async (req, res) => {
             let filter = {};
             if (req.params.tourId) {
