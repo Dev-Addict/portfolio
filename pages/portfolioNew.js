@@ -3,7 +3,7 @@ import {useState} from 'react';
 
 import BaseLayout from "../components/BaseLayout";
 import withAuth from "../components/withAuth";
-import PortfolioCreateForm from "../components/PortfolioCreateForm";
+import PortfolioForm from "../components/PortfolioForm";
 import {createPortfolio} from "../actions";
 import {Router} from '../routes';
 
@@ -30,7 +30,15 @@ const PortfolioNew = ({auth}) => {
             <Row>
                 <Col md="6">
                     <div className="error">{error}</div>
-                    <PortfolioCreateForm onSubmit={onSubmit}/>
+                    <PortfolioForm onSubmit={onSubmit} INITIAL_VALUES={{
+                        title: '',
+                        company: '',
+                        location: '',
+                        position: '',
+                        description: '',
+                        startDate: '',
+                        endDate: ''
+                    }}/>
                 </Col>
             </Row>
         </BaseLayout>

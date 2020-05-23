@@ -4,9 +4,9 @@ import moment from "moment";
 import {FormGroup, Label, Button} from 'reactstrap';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const DateInput = ({label, canHide = false, form: {setFieldValue, setFieldTouched, touched, errors}, field: {name}}) => {
-    const [date, setDate] = useState(moment());
-    const [isHidden, setHidden] = useState(false);
+const DateInput = ({label, canHide = false, form: {setFieldValue, setFieldTouched, touched, errors}, field: {name}, initialDate}) => {
+    const [date, setDate] = useState(initialDate? moment(initialDate) : moment());
+    const [isHidden, setHidden] = useState(!initialDate);
 
     useEffect(() => {
         setFieldValue(name, date, true);

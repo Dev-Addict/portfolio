@@ -4,17 +4,7 @@ import {Button} from 'reactstrap';
 import Input from "./Input";
 import DateInput from "./DateInput";
 
-const PortfolioCreateForm = ({onSubmit}) => {
-    const INITIAL_VALUES = {
-        title: '',
-        company: '',
-        location: '',
-        position: '',
-        description: '',
-        startDate: '',
-        endDate: ''
-    };
-
+const PortfolioForm = ({onSubmit, INITIAL_VALUES}) => {
     const validate = values => {
         const errors = {};
         Object.entries(values).forEach(([key, value]) => {
@@ -50,8 +40,10 @@ const PortfolioCreateForm = ({onSubmit}) => {
                         <Field type="text" name="position" className="form-control" component={Input} label="Position"/>
                         <Field type="textarea" name="description" component={Input} className="form-control"
                                label="Description"/>
-                        <Field name="startDate" className="form-control" component={DateInput} label="Start Date"/>
-                        <Field name="endDate" className="form-control" component={DateInput} label="End Date" canHide/>
+                        <Field name="startDate" className="form-control" component={DateInput} label="Start Date"
+                               initialDate={INITIAL_VALUES.startDate}/>
+                        <Field name="endDate" className="form-control" component={DateInput} label="End Date" canHide
+                               initialDate={INITIAL_VALUES.endDate}/>
                         <Button type="submit" disabled={isSubmitting} color="success" size="lg">
                             Create
                         </Button>
@@ -62,4 +54,4 @@ const PortfolioCreateForm = ({onSubmit}) => {
     );
 };
 
-export default PortfolioCreateForm;
+export default PortfolioForm;

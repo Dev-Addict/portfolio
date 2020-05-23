@@ -3,11 +3,11 @@ import {useState} from 'react';
 
 import BaseLayout from "../components/BaseLayout";
 import withAuth from "../components/withAuth";
-import PortfolioCreateForm from "../components/PortfolioCreateForm";
+import PortfolioForm from "../components/PortfolioForm";
 import {getPortfolio} from "../actions";
 import {Router} from '../routes';
 
-const PortfolioEdit = ({auth}) => {
+const PortfolioEdit = ({auth, portfolio}) => {
     const [error, setError] = useState('');
 
     const onSubmit = (values, {setSubmitting}) => {
@@ -26,11 +26,11 @@ const PortfolioEdit = ({auth}) => {
     };
 
     return (
-        <BaseLayout auth={auth} title="Create Portfolio" className="portfolio-create-page">
+        <BaseLayout auth={auth} title="Edit Portfolio" className="portfolio-create-page">
             <Row>
                 <Col md="6">
                     <div className="error">{error}</div>
-                    <PortfolioCreateForm onSubmit={onSubmit}/>
+                    <PortfolioForm onSubmit={onSubmit} INITIAL_VALUES={portfolio}/>
                 </Col>
             </Row>
         </BaseLayout>
@@ -40,7 +40,6 @@ const PortfolioEdit = ({auth}) => {
 PortfolioEdit.getInitialProps = async ({query}) => {
     try {
         const res = await getPortfolio(query.id);
-        console.log(res.data.data.doc);
         return {
             portfolio: res.data.data.doc
         };
@@ -48,8 +47,7 @@ PortfolioEdit.getInitialProps = async ({query}) => {
         return {
             portfolio: {}
         };
-    }
-};
+    }};
 
 // export default withAuth('admin')(PortfolioEdit);
 export default PortfolioEdit;
