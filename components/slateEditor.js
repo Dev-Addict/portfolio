@@ -35,6 +35,10 @@ const ParagraphNode = ({attributes, children}) => (
     </p>
 );
 
+const BoldMark = ({children}) => (
+    <strong>{children}</strong>
+);
+
 const SlateEditor = () => {
     const [value, setValue] = useState(initialValues);
 
@@ -53,20 +57,34 @@ const SlateEditor = () => {
         next();
     };
 
+    const renderMark = (props, editor, next) => {
+        if (props.mark.type === 'bold') {
+            return (
+                <BoldMark {...props}/>
+            );
+        }
+        next();
+    };
+
     const onKeyDown = (event, editor, next) => {
-        if (event.key !== '`' || !event.ctrlKey) {
+        if (!event.ctrlKey) {
             return next();
         }
 
-        event.preventDefault();
-
-        const isCode = editor.value.blocks.some(block => block.type === 'code');
-
-        editor.setBlocks(isCode ? 'paragraph' : 'code');
+        if (event.key === 'b') {
+            event.preventDefault();
+            editor.toggleMark('bold');
+        } else if (event.key === 'code') {
+            event.preventDefault();
+            const isCode = editor.value.blocks.some(block => block.type === 'code');
+            editor.setBlocks(isCode ? 'paragraph' : 'code');
+        }
+        next();
     };
 
     return (
-        <Editor value={value} onChange={onChange} renderNode={renderNode}/>
+        <Editor value={value} onChange={onChange} renderNode={renderNode} onKeyDown={onKeyDown}
+                renderMark={renderMark}/>
     );
 };
 
