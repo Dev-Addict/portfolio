@@ -16,7 +16,7 @@ const PortfolioForm = ({onSubmit, INITIAL_VALUES}) => {
         const startDate = values.startDate;
         const endDate = values.endDate;
 
-        if (startDate && endDate && endDate.isBefore(startDate)) {
+        if (startDate && endDate && (endDate || {isBefore: () => true}).isBefore(startDate)) {
             errors.endDate = 'End Date can not be before Start Date.'
         }
 
@@ -30,10 +30,11 @@ const PortfolioForm = ({onSubmit, INITIAL_VALUES}) => {
                 validate={validate}
                 onSubmit={onSubmit}>
                 {({
-                      handleSubmit,
-                      isSubmitting
+                      isSubmitting,
+                      values,
+                      setSubmitting
                   }) => (
-                    <Form onSubmit={handleSubmit}>
+                    <Form onSubmit={() => {onSubmit(values, {setSubmitting})}}>
                         <Field type="text" name="title" className="form-control" component={Input} label="Title"/>
                         <Field type="text" name="company" className="form-control" component={Input} label="Company"/>
                         <Field type="text" name="location" className="form-control" component={Input} label="Location"/>
@@ -45,7 +46,7 @@ const PortfolioForm = ({onSubmit, INITIAL_VALUES}) => {
                         <Field name="endDate" className="form-control" component={DateInput} label="End Date" canHide
                                initialDate={INITIAL_VALUES.endDate}/>
                         <Button type="submit" disabled={isSubmitting} color="success" size="lg">
-                            Create
+                            Submit
                         </Button>
                     </Form>
                 )}

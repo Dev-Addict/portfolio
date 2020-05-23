@@ -4,7 +4,7 @@ import {useState} from 'react';
 import BaseLayout from "../components/BaseLayout";
 import withAuth from "../components/withAuth";
 import PortfolioForm from "../components/PortfolioForm";
-import {getPortfolio} from "../actions";
+import {getPortfolio, updatePortfolio} from "../actions";
 import {Router} from '../routes';
 
 const PortfolioEdit = ({auth, portfolio}) => {
@@ -12,8 +12,7 @@ const PortfolioEdit = ({auth, portfolio}) => {
 
     const onSubmit = (values, {setSubmitting}) => {
         setSubmitting(true);
-        const portfolio = {...values};
-        createPortfolio(portfolio)
+        updatePortfolio(values, portfolio._id)
             .then(portfolio => {
                 setSubmitting(false);
                 setError('');
