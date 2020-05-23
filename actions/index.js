@@ -20,3 +20,7 @@ export const getPortfolios = async () => {
 export const createPortfolio = async (portfolio) => {
     return await portfolioApi.post('/portfolios', portfolio, setAuthHeader());
 };
+
+export const getPortfolio = async id => {
+    return await portfolioApi.get(`/portfolios/${id}`);
+};
