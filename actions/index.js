@@ -24,3 +24,6 @@ export const getPortfolio = async id =>
 
 export const updatePortfolio = async (portfolio, id) =>
     await portfolioApi.patch(`/portfolios/${id}`, portfolio, setAuthHeader());
+
+export const deletePortfolio = async (id) =>
+    await portfolioApi.delete(`/portfolios/${id}`, setAuthHeader());
