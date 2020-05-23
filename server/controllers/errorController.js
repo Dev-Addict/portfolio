@@ -46,6 +46,7 @@ const sendErrorProduction = (err, res) => {
 };
 
 module.exports = (err, req, res, next) => {
+    console.log(err);
     err.statusCode = err.statusCode || 500;
     err.status = err.status || 'error';
 
@@ -62,10 +63,10 @@ module.exports = (err, req, res, next) => {
         if (error.name === 'ValidationError') {
             error = handleValidationErrorDB(error);
         }
-        if (err.name === 'JsonWebTokenError') {
+        if (error.name === 'JsonWebTokenError') {
             error = handleWebTokenError();
         }
-        if (error.name === 'TokenExpiredError') {
+        if (error.name === 'UnauthorizedError') {
             error = handleJsonWebTokenExpiredError();
         }
         sendErrorProduction(error, res);

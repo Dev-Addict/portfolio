@@ -6,7 +6,6 @@ const next = require('next');
 
 const routes = require('../routes');
 const portfolioRouter = require('./routes/portfolioRouter');
-const auth = require('./services/auth');
 const errorController = require('./controllers/errorController');
 
 dotenv.config({
@@ -28,7 +27,7 @@ app.prepare()
             next();
         });
 
-        server.use('/api/v1/portfolios', auth.checkJWT, auth.checkRole('admin'), portfolioRouter);
+        server.use('/api/v1/portfolios', portfolioRouter);
 
         server.get('*', (req, res) => {
             return handle(req, res);

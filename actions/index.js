@@ -1,7 +1,7 @@
-import axios from 'axios';
 import Cookies from 'js-cookie';
 
 import {getCookieFromReq} from '../utils';
+import portfolioApi from '../api/portfolio';
 
 const setAuthHeader = (req) => {
     const token = req ? getCookieFromReq(req, 'jwt') : Cookies.getJSON('jwt');
@@ -13,6 +13,10 @@ const setAuthHeader = (req) => {
     return undefined;
 };
 
-export const getPortfolios = async (req) => {
-    return await axios.get('http://localhost:3000/api/v1/portfolios', setAuthHeader(req))
+export const getPortfolios = async () => {
+    return await portfolioApi.get('/portfolios')
+};
+
+export const createPortfolio = async (portfolio) => {
+    return await portfolioApi.post('/portfolios', portfolio, setAuthHeader());
 };

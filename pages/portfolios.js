@@ -26,9 +26,9 @@ const Portfolios = ({auth, portfolios}) => {
     );
 };
 
-Portfolios.getInitialProps = async ({req}) => {
+Portfolios.getInitialProps = async () => {
     try {
-        const res = await getPortfolios(req);
+        const res = await getPortfolios();
         const portfolios = res.data.data.docs;
         return {
             portfolios
