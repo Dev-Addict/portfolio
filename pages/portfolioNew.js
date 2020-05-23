@@ -45,5 +45,4 @@ const PortfolioNew = ({auth}) => {
     );
 };
 
-// export default withAuth('admin')(PortfolioNew);
-export default PortfolioNew;
+export default withAuth('admin')(PortfolioNew);

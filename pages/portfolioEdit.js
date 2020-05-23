@@ -48,5 +48,4 @@ PortfolioEdit.getInitialProps = async ({query}) => {
         };
     }};
 
-// export default withAuth('admin')(PortfolioEdit);
-export default PortfolioEdit;
+export default withAuth('admin')(PortfolioEdit);

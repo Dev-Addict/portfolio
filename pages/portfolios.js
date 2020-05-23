@@ -1,3 +1,4 @@
+import {Fragment} from 'react';
 import {Col, Card, CardHeader, CardBody, CardTitle, CardText, Button} from 'reactstrap';
 
 import BaseLayout from "../components/BaseLayout";
@@ -15,12 +16,16 @@ const Portfolios = ({auth, portfolios}) => {
                         <CardTitle className="portfolio-card-title">{portfolio.title}</CardTitle>
                         <CardText className="portfolio-card-text">{portfolio.description}</CardText>
                         <div className="readMore">
-                            <Button color="warning" onClick={() => {
-                                Router.pushRoute(`/portfolioEdit/${portfolio._id}`)
-                            }}>
-                                Edit
-                            </Button>{' '}
-                            <Button color="danger">Delete</Button>
+                            {auth.isAuthenticated &&
+                            <Fragment>
+                                <Button color="warning" onClick={() => {
+                                    Router.pushRoute(`/portfolioEdit/${portfolio._id}`);
+                                }}>
+                                    Edit
+                                </Button>{' '}
+                                <Button color="danger">Delete</Button>
+                            </Fragment>
+                            }
                         </div>
                     </CardBody>
                 </Card>
