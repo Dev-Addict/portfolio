@@ -42,9 +42,6 @@ exports.createOne = Model =>
     catchRequest(
         async (req, res) => {
             const doc = await Model.create(req.body);
-            if (!doc) {
-                throw new AppError('We are not abel to create model.', 404)
-            }
             res.status(201).json({
                 status: 'success',
                 data: {
