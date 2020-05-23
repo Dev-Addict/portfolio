@@ -21,6 +21,6 @@ exports.checkRole = (role) => (req, res, next) => {
     }
     res.status(401).json({
         status: 'err',
-        message: `You Need To Be ${role} To Use This Route. ${err.message}`
+        message: `You Need To Be ${role} To Use This Route.`
     });
 };

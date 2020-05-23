@@ -1,11 +1,6 @@
 const mongoose = require('mongoose');
 
 const portfolioSchema = new mongoose.Schema({
-    userId: {
-        type: String,
-        required: [true, 'UserId is required'],
-        maxLength: 512
-    },
     title: {
         type: String,
         required: [true, 'Title is required'],

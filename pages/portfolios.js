@@ -22,6 +22,7 @@ const Portfolios = ({auth, portfolios}) => {
 
     return (
         <BaseLayout auth={auth} title="Portfolios" className="portfolio-page">
+            {renderPortfolios()}
         </BaseLayout>
     );
 };
