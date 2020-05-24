@@ -1,5 +1,5 @@
 import BaseLayout from "../components/BaseLayout";
-import SlateEditor from "../components/slateEditor";
+import SlateEditor from "../components/SlateEditor";
 import withAuth from "../components/withAuth";
 
 const BlogEditor = ({auth}) => {
