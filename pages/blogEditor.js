@@ -4,7 +4,7 @@ import withAuth from "../components/withAuth";
 
 const BlogEditor = ({auth}) => {
     return (
-        <BaseLayout auth={auth} title="Edit Blog" className="blog-editor-page">
+        <BaseLayout auth={auth} className="blog-editor-page">
             <SlateEditor/>
         </BaseLayout>
     );

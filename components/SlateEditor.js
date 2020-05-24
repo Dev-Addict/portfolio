@@ -3,6 +3,7 @@ import {Editor} from "slate-react";
 import {Value} from "slate";
 
 import SlateEditorHoverMenu from "./SlateEditorHoverMenu";
+import SlateEditorControlMenu from "./SlateEditorControlMenu";
 import {renderMark} from "./SlateEditorRenderers";
 
 const initialValues = Value.fromJSON({
@@ -63,6 +64,7 @@ const SlateEditor = () => {
         const children = next();
         return (
             <Fragment>
+                <SlateEditorControlMenu/>
                 {children}
                 <SlateEditorHoverMenu innerRef={m => menu = m} editor={editor}/>
             </Fragment>
